@@ -1,155 +1,387 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    
-    
-      
-        <link rel="shortcut icon" href="/BKell-Dog/amberelectronics.github.io/images/favicon.ico">
-      
-      
-        <link rel="icon" type="image/png" href="/BKell-Dog/amberelectronics.github.io/images/favicon-192x192.png" sizes="192x192">
-      
-      
-        <link rel="apple-touch-icon" sizes="180x180" href="/BKell-Dog/amberelectronics.github.io/images/apple-touch-icon.png">
-      
-    
-    <!-- title -->
-    <title>Amber Electronics</title>
-    <!-- styles -->
-    
-    <link ref="stylesheet" href="https://raw.githubusercontent.com/BKell-Dog/amberelectronics.github.io/refs/heads/master/css/style.css" >
-    <!-- persian styles -->
-    
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body class="mx-auto ltr">
-    <div class="content index h-card">
-        
-        <section id="home" >
-  <style>
-  * General Styling */ body { margin: 0; overflow: hidden; background: black; font-family: 'Courier New', monospace; } /* Matrix Container */ .matrix-container { top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; display: flex; justify-contents: center; align-items: center;} canvas { z-index: 1; }
-  </style>
-
-  <!-- Landing Screen with Background Effect -->
-  <div class="matrix-container">
-    <!-- Main Page Title -->
-    <h1 style="z-index: 2; position: absolute; width: 100%; text-align: center; font-family: fantasy; font-size: 25px; color: #e5fffd;">AMBER ELECTRONICS</h1>
-  </div> 
-
-  <script>
-    const canvas = document.createElement("canvas");
-    document.querySelector(".matrix-container").appendChild(canvas);
-
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const fontSize = 16; // Size of the text
-    let columns = Math.ceil(canvas.width / fontSize);
-    let drops = Array(columns).fill(0);
-
-    /*const characters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()";*/
-    const characters = "01";//"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン一二三四五六七八九十";
-
-    let hue = 25; // Starting hue for HSL
-
-    function drawMatrix() {
-      // Slight fade effect for the background
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Change color based on hue
-      ctx.fillStyle = `hsl(${hue}, 100%, 50%)`; // Dynamic HSL color
-      ctx.font = `${fontSize}px monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = characters[Math.floor(Math.random() * characters.length)];
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-
-        ctx.fillText(text, x, y);
-
-        // Reset drops to top randomly
-        if (y > canvas.height && Math.random() > 0.95) {
-          drops[i] = 0;
-        }
-
-        drops[i]++;
+<html lang="en" %>
+  <head>
+      <!-- so meta -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="HandheldFriendly" content="True">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+      <!-- title -->
+      <title>AMBER ELECTRONICS</title>
+      <!-- styles -->
+      <link ref="stylesheet" href="style.css" >
+  </head>
+  <body class="mx-auto" style="margin: 0px; background-color: black;">
+    <style>
+      section {
+        height: calc(100vh);
       }
+    </style>
+      <div class="content index">
+        <section id="home" >
+          <style>
+          /* General Styling */ 
+          body { margin: 0; background: black; font-family: 'Courier New', monospace; } 
+          /* Matrix Container */ 
+          .matrix-container { top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; display: flex; align-items: center;}
+          </style>
 
-      // Increment hue for smooth color transition
-      hue = 25;
-      if (hue >= 360) hue = 0; // Reset hue after a full cycle
-    }
+          <!-- Landing Screen with Background Effect -->
+          <div class="matrix-container">
+            <!-- Main Page Title -->
+            <h1 style="position: absolute; width: 100%; text-align: center; font-family: fantasy; font-size: 35px; color: #e5fffd; letter-spacing: 5px; font-weight: 700;">AMBER ELECTRONICS</h1>
+          </div>
+          <script>
+            const canvas = document.createElement("canvas");
+            document.querySelector(".matrix-container").appendChild(canvas);
 
-    setInterval(drawMatrix, 50);
+            const ctx = canvas.getContext("2d");
 
-    // Resize canvas dynamically
-    window.addEventListener("resize", () => {
-      const parent = document.querySelector(".matrix-container");
-      const { width, height } = parent.getBoundingClientRect();
-      canvas.width = width; //window.innerWidth;
-      canvas.height = height; //window.innerHeight;
-      drops.length = Math.ceil(canvas.width / fontSize);
-      columns = Math.ceil(canvas.width / fontSize);
-      drops = Array(columns).fill(0);
-    });
-  </script>
-</section>
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-<section id="roadmap">
-</section>
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2016-2024
-    Amber Electronics
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/BKell-Dog/amberelectronics.github.io/">Home</a></li><!--
-     --><!--
-       --><li><a href="/BKell-Dog/amberelectronics.github.io/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/BKell-Dog/amberelectronics.github.io/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a href="http://github.com/probberechts">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
-</footer>
+            const fontSize = 16; // Size of the text
+            let columns = Math.ceil(canvas.width / fontSize);
+            let drops = Array(columns).fill(0);
 
+            /*const characters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()";*/
+            const characters = "01";//"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン一二三四五六七八九十";
+
+            let hue = 25; // Starting hue for HSL
+
+            function drawMatrix() {
+              // Slight fade effect for the background
+              ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+              // Change color based on hue
+              ctx.fillStyle = `hsl(${hue}, 100%, 50%)`; // Dynamic HSL color
+              ctx.font = `${fontSize}px monospace`;
+
+              for (let i = 0; i < drops.length; i++) {
+                const text = characters[Math.floor(Math.random() * characters.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                ctx.fillText(text, x, y);
+
+                // Reset drops to top randomly
+                if (y > canvas.height && Math.random() > 0.95) {
+                  drops[i] = 0;
+                }
+
+                drops[i]++;
+              }
+
+              // Increment hue for smooth color transition
+              hue = 25;
+              if (hue >= 360) hue = 0; // Reset hue after a full cycle
+            }
+
+            setInterval(drawMatrix, 50);
+
+            // Resize canvas dynamically
+            window.addEventListener("resize", () => {
+              const parent = document.querySelector(".matrix-container");
+              const { width, height } = parent.getBoundingClientRect();
+              canvas.width = width; //window.innerWidth;
+              canvas.height = height; //window.innerHeight;
+              drops.length = Math.ceil(canvas.width / fontSize);
+              columns = Math.ceil(canvas.width / fontSize);
+              drops = Array(columns).fill(0);
+            });
+          </script>
+        </section>
+        <section id="roadmaps" style="display: flex; justify-content: center;">
+          <style>
+                .grid-container {
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr); /* Two columns */
+                  grid-template-rows: repeat(2, 1fr); /* Two rows */
+                  gap: 10px; /* Spacing between grid items */
+                  width: 100%; /* Grid width */
+                  position: absoute;
+                  z-index: 2;
+                }
+
+                .grid-item {
+                  padding-bottom: 40px;
+                  text-align: center;
+                  max-width: 300px;
+                  margin: auto;
+                }
+
+                .grid-item h2 {
+                  margin: 0 0 20px 0;
+                  font-family: fantasy;
+                  font-weight: 170;
+                  font-size: 24px; 
+                  color: #e5fffd; 
+                  letter-spacing: 5px;
+                  text-shadow: 0 0 3px hsl(175, 100%, 95%);
+                }
+
+                .grid-item button {
+                  padding: 10px 15px;
+                  font-size: 1rem;
+                  font-family: fantasy;
+                  letter-spacing: 2px;
+                  color: #e5fffd;
+                  background-color: rgb(255, 118, 20);
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  transition: background-color 0.3s ease;
+                }
+
+                .grid-item button:hover {
+                  background-color: #0068cb;
+                }
+
+                /* Cube */
+                .cube-container {
+                  perspective: 1000px;
+                  position: absolute;
+                  height: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  z-index: 1;
+                }
+
+                .cube {
+                  position: relative;
+                  width: 150px;
+                  height: 150px;
+                  transform-style: preserve-3d;
+                  animation: rotateCube 8s infinite linear;
+                }
+
+                .cube div {
+                  position: absolute;
+                  width: 150px;
+                  height: 150px;
+                  background: none;
+                  border: 2px solid hsla(25, 100%, 50%, 0.8); /* Glowing lineart effect */
+                  animation: flicker 0.125s infinite; /* Fast flicker animation */
+                  box-shadow: 0 0 20px hsla(25, 100%, 50%, 0.5);
+                }
+
+                .cube .front  { transform: translateZ(75px); }
+                .cube .back   { transform: translateZ(-75px) rotateY(180deg); }
+                .cube .right  { transform: rotateY(90deg) translateZ(75px); }
+                .cube .left   { transform: rotateY(-90deg) translateZ(75px); }
+                .cube .top    { transform: rotateX(90deg) translateZ(75px); }
+                .cube .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+                @keyframes rotateCube {
+                  0% {
+                    transform: rotateX(0deg) rotateY(0deg);
+                  }
+                  100% {
+                    transform: rotateX(360deg) rotateY(360deg);
+                  }
+                }
+
+                @keyframes flicker {
+                  0%, 50% {
+                    opacity: 0.8; /* Default opacity */
+                    box-shadow: 0 0 10px hsla(25, 100%, 50%, 0.5);
+                  }
+                  25%, 75% {
+                    opacity: 0.5; /* Dimmer flicker */
+                    box-shadow: 0 0 5px hsla(25, 100%, 50%, 0.3);
+                  }
+                  100% {
+                    opacity: 1; /* Full brightness flicker */
+                    box-shadow: 0 0 15px hsla(25, 100%, 50%, 0.7);
+                  }
+                }
+          </style>
+          <div class="cube-container">
+            <div class="cube">
+              <div class="front"></div>
+              <div class="back"></div>
+              <div class="right"></div>
+              <div class="left"></div>
+              <div class="top"></div>
+              <div class="bottom"></div>
+            </div>
+          </div>
+          <div class="grid-container">
+            <div class="grid-item">
+              <h2>Radio Integrated Fire Helmets</h2>
+              <button onclick="location.href='page1.html'">See Roadmap</button>
+            </div>
+            <div class="grid-item">
+              <h2>Thermal Vision Cloaking Fabric</h2>
+              <button onclick="location.href='page2.html'">See Roadmap</button>
+            </div>
+            <div class="grid-item">
+              <h2>Body-Detection Radar</h2>
+              <button onclick="location.href='page3.html'">See Roadmap</button>
+            </div>
+            <div class="grid-item">
+              <h2>Personal Car Radio Station</h2>
+              <button onclick="location.href='page4.html'">See Roadmap</button>
+            </div>
+          </div>
+        </section>
+        <section class="contact">
+          <style>
+            .contact {
+              height: 100vh;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .terminal-container {
+              background: rgba(0, 0, 0, 0.9);
+              padding: 20px;
+              border: 1px solid hsl(25, 100%, 50%);
+              border-radius: 5px;
+              width: 80%;
+              max-width: 600px;
+              box-shadow: 0 0 4px hsla(25, 100%, 50%, 0.5);
+              display: flex;
+              flex-direction: column;
+            }
+
+            .terminal-input {
+              width: calc(100% - 20px); /* Adjust for padding */
+              background: transparent;
+              border: none;
+              outline: none;
+              color: hsl(25, 100%, 50%);
+              font-size: 1.2em;
+              caret-color: hsl(25, 100%, 50%);
+            }
+
+            .terminal-line::before {
+              color: hsl(25, 100%, 50%);
+              content: "user@amberelec:~$";
+              display: flex;
+              flex-direction: rows;
+              margin-right: 10px;
+            }
+
+            .terminal-line {
+              display: flex;
+              align-items: center;
+              white-space: nowrap;
+              color: hsl(25, 100%, 50%);
+            }
+
+            .terminal-container .terminal-cursor {
+              display: inline-block;
+              width: 10px;
+              height: 1.2em;
+              background: hsl(25, 100%, 50%);
+              animation: blink 1s steps(2, start) infinite;
+            }
+
+            .terminal-container:focus {
+              outline: none; /* Remove default focus outline */
+              border: 1px solid hsl(25, 100%, 50%); /* Keep orange border */
+            }
+
+            .terminal-container *::selection {
+              background: hsl(25, 100%, 50%); /* Orange highlight */
+              color: white; /* White text */
+            }
+
+            @keyframes blink {
+              0%, 50% {
+                background: hsl(25, 100%, 50%);
+              }
+              50.01%, 100% {
+                background: transparent;
+              }
+            }
+          </style>
+          <div class="terminal-container">
+            <div class="terminal-line">
+              <span class="terminal-text"></span>
+              <div class="terminal-cursor"></div>
+            </div>
+          </div>
+          <script>
+            const terminalContainer = document.querySelector('.terminal-container');
+            const terminalText = document.querySelector('.terminal-text');
+
+            let prompts = [
+              "Enter your email.",
+              "Type your message.",
+              "Send?"
+            ];
+
+            let currentPromptIndex = 0;
+            let terminalLines = terminalContainer.children;
+
+            // Initialize terminal
+            function addLine(content = "") {
+              const line = document.createElement('div');
+              line.className = 'terminal-line';
+              line.innerHTML = (content && content !== "")
+                ? `<span class="terminal-text non-input">${content}</span>`
+                : `<span class="terminal-text"></span></div>`;
+              if (currentPromptIndex == 0)
+                terminalContainer.insertBefore(line, document.querySelector(".terminal-line"));
+              else
+                terminalContainer.insertBefore(line, terminalLines[terminalLines.length-1]);
+              terminalContainer.scrollTop = terminalContainer.scrollHeight; // Keep scrolled to the bottom
+              terminalLines = terminalContainer.children;
+            }
+
+            function scrollToBottom() {
+              terminalContainer.scrollTop = terminalContainer.scrollHeight;
+            }
+
+            // Print the first prompt
+            addLine(prompts[currentPromptIndex]);
+
+            document.addEventListener('keydown', (event) => {
+              // Prevent default browser shortcuts like page refresh
+              event.preventDefault();
+
+              if (event.key === "Enter") {
+                if (currentPromptIndex < prompts.length - 1)
+                {
+                  currentPromptIndex++;
+                  addLine(terminalText.textContent); //Send current content to new line
+                  addLine(prompts[currentPromptIndex]); //Print next prompt
+                }
+                else
+                {
+                  addLine(terminalText.textContent);//Send current content to new line
+                }
+                terminalText.textContent = "";
+                return;
+              }
+
+              // Handle backspace
+              if (event.key === "Backspace") {
+                terminalText.textContent = terminalText.textContent.slice(0, -1);
+                return;
+              }
+
+              // Handle regular characters
+              if (event.key.length === 1) {
+                terminalText.textContent += event.key;
+              }
+            });
+
+            // Refocus on click
+            terminalContainer.addEventListener('click', () => {
+              terminalContainer.focus();
+            });
+
+            terminalContainer.setAttribute('tabindex', 0); // Make terminal focusable
+            terminalContainer.focus();
+          </script>
+        </section>
+        
     </div>
-    <!-- styles -->
-
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-
-<script src="https://raw.githubusercontent.com/BKell-Dog/amberelectronics.github.io/refs/heads/master/js/main.js"></script>
-<!-- search -->
-
 </body>
 </html>
