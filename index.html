@@ -276,15 +276,24 @@
             color: hsl(25, 100%, 50%);
             content: "user@amberelec:~$";
             display: flex;
-            flex-direction: rows;
+            flex-direction: row;
             margin-right: 10px;
           }
 
           .terminal-line {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             white-space: nowrap;
             color: hsl(25, 100%, 50%);
+          }
+
+          .terminal-text {
+            display: flex;
+            flex-direction: row;
+            white-space: pre-wrap; /* Allows text to wrap while preserving whitespace */
+            overflow-wrap: break-word; /* Breaks long words to prevent overflow */
+            word-break: break-word; /* Fallback for older browsers */
+            max-width: 70%; /* Ensure it doesn't exceed the container's width */
           }
 
           .terminal-container .terminal-cursor {
@@ -338,7 +347,7 @@
           <div class="terminal-container">
             <div class="terminal-line">
               <span class="terminal-text"></span>
-              <div class="terminal-cursor"></div>
+              <span class="terminal-cursor"></span>
             </div>
           </div>
         </div>
@@ -540,15 +549,15 @@
             event.preventDefault();
 
             if (event.key === "Enter") {
-                var result = analyzeInput(terminalText.textContent);
-                if (currentPromptIndex == 0 && result == "email")
-                  fromAddress = terminalText.textContent;
-                else if (currentPromptIndex == 1)
-                  name = terminalText.textContent;
-                else if (currentPromptIndex == 2)
-                  message = terminalText.textContent;
-                else if (currentPromptIndex == 3 && result === "yes")
-                  sendEmail(name, fromAddress, message);
+              var result = analyzeInput(terminalText.textContent);
+              if (currentPromptIndex == 0 && result == "email")
+                fromAddress = terminalText.textContent;
+              else if (currentPromptIndex == 1)
+                name = terminalText.textContent;
+              else if (currentPromptIndex == 2)
+                message = terminalText.textContent;
+              else if (currentPromptIndex == 3 && result === "yes")
+                sendEmail(name, fromAddress, message);
                 
               if (currentPromptIndex < prompts.length - 1)
               {
@@ -562,7 +571,8 @@
                 addLine(terminalText.textContent);//Send current content to new line
                 terminalText.parentElement.style.display = "None"; // Make current typing line gone
                 // Start the first task
-                startTasks();
+                if (currentPromptIndex == 3 && result === "yes")
+                  startTasks();
               }
               return;
             }
