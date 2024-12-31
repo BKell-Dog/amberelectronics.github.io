@@ -16,372 +16,578 @@
       section {
         height: calc(100vh);
       }
+
+      .section-title {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 70px;
+        font-size: 30px;
+      }
+
+      .crt-text {
+        font-family: fantasy;
+        font-weight: 170;
+        color: #e5fffd; 
+        letter-spacing: 5px;
+        text-shadow: 0 0 3px hsl(175, 100%, 95%);
+      }
     </style>
-      <div class="content index">
-        <section id="home" >
-          <style>
-          /* General Styling */ 
-          body { margin: 0; background: black; font-family: 'Courier New', monospace; } 
-          /* Matrix Container */ 
-          .matrix-container { top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; display: flex; align-items: center;}
-          </style>
+    <div class="content index">
+      <section id="home" >
+        <style>
+        /* General Styling */ 
+        body { margin: 0; background: black; font-family: 'Courier New', monospace; } 
+        /* Matrix Container */ 
+        .matrix-container { top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; background-color: black; display: flex; align-items: center;}
+        </style>
 
-          <!-- Landing Screen with Background Effect -->
-          <div class="matrix-container">
-            <!-- Main Page Title -->
-            <h1 style="position: absolute; width: 100%; text-align: center; font-family: fantasy; font-size: 35px; color: #e5fffd; letter-spacing: 5px; font-weight: 700;">AMBER ELECTRONICS</h1>
-          </div>
-          <script>
-            const canvas = document.createElement("canvas");
-            document.querySelector(".matrix-container").appendChild(canvas);
+        <!-- Landing Screen with Background Effect -->
+        <div class="matrix-container">
+          <!-- Main Page Title -->
+          <h1 class="crt-text" style="position: absolute; width: 100%; text-shadow: 0 0 0px white; text-align: center; font-size: 35px; font-weight: 700;">AMBER ELECTRONICS</h1>
+        </div>
+        <script>
+          const canvas = document.createElement("canvas");
+          document.querySelector(".matrix-container").appendChild(canvas);
 
-            const ctx = canvas.getContext("2d");
+          const ctx = canvas.getContext("2d");
 
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
 
-            const fontSize = 16; // Size of the text
-            let columns = Math.ceil(canvas.width / fontSize);
-            let drops = Array(columns).fill(0);
+          const fontSize = 16; // Size of the text
+          let columns = Math.ceil(canvas.width / fontSize);
+          let drops = Array(columns).fill(0);
 
-            /*const characters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()";*/
-            const characters = "01";//"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン一二三四五六七八九十";
+          /*const characters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()";*/
+          const characters = "01";//"あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン一二三四五六七八九十";
 
-            let hue = 25; // Starting hue for HSL
+          let hue = 25; // Starting hue for HSL
 
-            function drawMatrix() {
-              // Slight fade effect for the background
-              ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
+          function drawMatrix() {
+            // Slight fade effect for the background
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-              // Change color based on hue
-              ctx.fillStyle = `hsl(${hue}, 100%, 50%)`; // Dynamic HSL color
-              ctx.font = `${fontSize}px monospace`;
+            // Change color based on hue
+            ctx.fillStyle = `hsl(${hue}, 100%, 50%)`; // Dynamic HSL color
+            ctx.font = `${fontSize}px monospace`;
 
-              for (let i = 0; i < drops.length; i++) {
-                const text = characters[Math.floor(Math.random() * characters.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
+            for (let i = 0; i < drops.length; i++) {
+              const text = characters[Math.floor(Math.random() * characters.length)];
+              const x = i * fontSize;
+              const y = drops[i] * fontSize;
 
-                ctx.fillText(text, x, y);
+              ctx.fillText(text, x, y);
 
-                // Reset drops to top randomly
-                if (y > canvas.height && Math.random() > 0.95) {
-                  drops[i] = 0;
-                }
-
-                drops[i]++;
+              // Reset drops to top randomly
+              if (y > canvas.height && Math.random() > 0.95) {
+                drops[i] = 0;
               }
 
-              // Increment hue for smooth color transition
-              hue = 25;
-              if (hue >= 360) hue = 0; // Reset hue after a full cycle
+              drops[i]++;
             }
 
-            setInterval(drawMatrix, 50);
+            // Increment hue for smooth color transition
+            hue = 25;
+            if (hue >= 360) hue = 0; // Reset hue after a full cycle
+          }
 
-            // Resize canvas dynamically
-            window.addEventListener("resize", () => {
-              const parent = document.querySelector(".matrix-container");
-              const { width, height } = parent.getBoundingClientRect();
-              canvas.width = width; //window.innerWidth;
-              canvas.height = height; //window.innerHeight;
-              drops.length = Math.ceil(canvas.width / fontSize);
-              columns = Math.ceil(canvas.width / fontSize);
-              drops = Array(columns).fill(0);
-            });
-          </script>
-        </section>
-        <section id="roadmaps" style="display: flex; justify-content: center;">
-          <style>
-                .grid-container {
-                  display: grid;
-                  grid-template-columns: repeat(2, 1fr); /* Two columns */
-                  grid-template-rows: repeat(2, 1fr); /* Two rows */
-                  gap: 10px; /* Spacing between grid items */
-                  width: 100%; /* Grid width */
-                  position: absoute;
-                  z-index: 2;
+          setInterval(drawMatrix, 50);
+
+          // Resize canvas dynamically
+          window.addEventListener("resize", () => {
+            const parent = document.querySelector(".matrix-container");
+            const { width, height } = parent.getBoundingClientRect();
+            canvas.width = width; //window.innerWidth;
+            canvas.height = height; //window.innerHeight;
+            drops.length = Math.ceil(canvas.width / fontSize);
+            columns = Math.ceil(canvas.width / fontSize);
+            drops = Array(columns).fill(0);
+          });
+        </script>
+      </section>
+      <section id="roadmaps" style="display: flex; justify-content: center;">
+        <style>
+              .grid-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* Two columns */
+                grid-template-rows: repeat(2, 1fr); /* Two rows */
+                gap: 10px; /* Spacing between grid items */
+                width: 100%; /* Grid width */
+                position: absoute;
+                z-index: 2;
+              }
+
+              .grid-item {
+                padding-bottom: 40px;
+                text-align: center;
+                max-width: 300px;
+                margin: auto;
+              }
+
+              .grid-item h2 {
+                margin: 0 0 20px 0;
+                font-size: 24px;
+              }
+
+              .grid-item button {
+                padding: 10px 15px;
+                font-size: 1rem;
+                font-family: fantasy;
+                letter-spacing: 2px;
+                color: #e5fffd;
+                background-color: rgb(255, 118, 20);
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+              }
+
+              .grid-item button:hover {
+                background-color: #0068cb;
+              }
+
+              /* Cube */
+              .cube-container {
+                perspective: 1000px;
+                position: absolute;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+              }
+
+              .cube {
+                position: relative;
+                width: 150px;
+                height: 150px;
+                transform-style: preserve-3d;
+                animation: rotateCube 8s infinite linear;
+              }
+
+              .cube div {
+                position: absolute;
+                width: 150px;
+                height: 150px;
+                background: none;
+                border: 2px solid hsla(25, 100%, 50%, 0.8); /* Glowing lineart effect */
+                animation: flicker 0.1s infinite; /* Fast flicker animation */
+                box-shadow: 0 0 20px hsla(25, 100%, 50%, 0.5);
+              }
+
+              .cube .front  { transform: translateZ(75px); }
+              .cube .back   { transform: translateZ(-75px) rotateY(180deg); }
+              .cube .right  { transform: rotateY(90deg) translateZ(75px); }
+              .cube .left   { transform: rotateY(-90deg) translateZ(75px); }
+              .cube .top    { transform: rotateX(90deg) translateZ(75px); }
+              .cube .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+              @keyframes rotateCube {
+                0% {
+                  transform: rotateX(0deg) rotateY(0deg);
                 }
-
-                .grid-item {
-                  padding-bottom: 40px;
-                  text-align: center;
-                  max-width: 300px;
-                  margin: auto;
+                100% {
+                  transform: rotateX(360deg) rotateY(360deg);
                 }
+              }
 
-                .grid-item h2 {
-                  margin: 0 0 20px 0;
-                  font-family: fantasy;
-                  font-weight: 170;
-                  font-size: 24px; 
-                  color: #e5fffd; 
-                  letter-spacing: 5px;
-                  text-shadow: 0 0 3px hsl(175, 100%, 95%);
+              @keyframes flicker {
+                0%, 50% {
+                  opacity: 0.8; /* Default opacity */
+                  box-shadow: 0 0 10px hsla(25, 100%, 50%, 0.5);
                 }
-
-                .grid-item button {
-                  padding: 10px 15px;
-                  font-size: 1rem;
-                  font-family: fantasy;
-                  letter-spacing: 2px;
-                  color: #e5fffd;
-                  background-color: rgb(255, 118, 20);
-                  border: none;
-                  border-radius: 5px;
-                  cursor: pointer;
-                  transition: background-color 0.3s ease;
+                25%, 75% {
+                  opacity: 0.5; /* Dimmer flicker */
+                  box-shadow: 0 0 5px hsla(25, 100%, 50%, 0.3);
                 }
-
-                .grid-item button:hover {
-                  background-color: #0068cb;
+                100% {
+                  opacity: 1; /* Full brightness flicker */
+                  box-shadow: 0 0 15px hsla(25, 100%, 50%, 0.7);
                 }
-
-                /* Cube */
-                .cube-container {
-                  perspective: 1000px;
-                  position: absolute;
-                  height: 100%;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  z-index: 1;
-                }
-
-                .cube {
-                  position: relative;
-                  width: 150px;
-                  height: 150px;
-                  transform-style: preserve-3d;
-                  animation: rotateCube 8s infinite linear;
-                }
-
-                .cube div {
-                  position: absolute;
-                  width: 150px;
-                  height: 150px;
-                  background: none;
-                  border: 2px solid hsla(25, 100%, 50%, 0.8); /* Glowing lineart effect */
-                  animation: flicker 0.125s infinite; /* Fast flicker animation */
-                  box-shadow: 0 0 20px hsla(25, 100%, 50%, 0.5);
-                }
-
-                .cube .front  { transform: translateZ(75px); }
-                .cube .back   { transform: translateZ(-75px) rotateY(180deg); }
-                .cube .right  { transform: rotateY(90deg) translateZ(75px); }
-                .cube .left   { transform: rotateY(-90deg) translateZ(75px); }
-                .cube .top    { transform: rotateX(90deg) translateZ(75px); }
-                .cube .bottom { transform: rotateX(-90deg) translateZ(75px); }
-
-                @keyframes rotateCube {
-                  0% {
-                    transform: rotateX(0deg) rotateY(0deg);
-                  }
-                  100% {
-                    transform: rotateX(360deg) rotateY(360deg);
-                  }
-                }
-
-                @keyframes flicker {
-                  0%, 50% {
-                    opacity: 0.8; /* Default opacity */
-                    box-shadow: 0 0 10px hsla(25, 100%, 50%, 0.5);
-                  }
-                  25%, 75% {
-                    opacity: 0.5; /* Dimmer flicker */
-                    box-shadow: 0 0 5px hsla(25, 100%, 50%, 0.3);
-                  }
-                  100% {
-                    opacity: 1; /* Full brightness flicker */
-                    box-shadow: 0 0 15px hsla(25, 100%, 50%, 0.7);
-                  }
-                }
-          </style>
-          <div class="cube-container">
-            <div class="cube">
-              <div class="front"></div>
-              <div class="back"></div>
-              <div class="right"></div>
-              <div class="left"></div>
-              <div class="top"></div>
-              <div class="bottom"></div>
-            </div>
+              }
+        </style>
+        <div class="cube-container">
+          <div class="cube">
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="right"></div>
+            <div class="left"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
           </div>
+        </div>
+        <div style="width: 100%">
+          <h1 class="section-title crt-text">Project Roadmaps</h1>
           <div class="grid-container">
             <div class="grid-item">
-              <h2>Radio Integrated Fire Helmets</h2>
+              <h2 class="crt-text">Radio Integrated Fire Helmets</h2>
               <button onclick="location.href='page1.html'">See Roadmap</button>
             </div>
             <div class="grid-item">
-              <h2>Thermal Vision Cloaking Fabric</h2>
+              <h2 class="crt-text">Thermal Vision Cloaking Fabric</h2>
               <button onclick="location.href='page2.html'">See Roadmap</button>
             </div>
             <div class="grid-item">
-              <h2>Body-Detection Radar</h2>
+              <h2 class="crt-text">Body-Detection Radar</h2>
               <button onclick="location.href='page3.html'">See Roadmap</button>
             </div>
             <div class="grid-item">
-              <h2>Personal Car Radio Station</h2>
+              <h2 class="crt-text">Personal Car Radio Station</h2>
               <button onclick="location.href='page4.html'">See Roadmap</button>
             </div>
           </div>
-        </section>
-        <section class="contact">
-          <style>
-            .contact {
-              height: 100vh;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
+        </div>
+      </section>
+      <section class="contact">
+        <style>
+          .contact {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
 
-            .terminal-container {
-              background: rgba(0, 0, 0, 0.9);
-              padding: 20px;
-              border: 1px solid hsl(25, 100%, 50%);
-              border-radius: 5px;
-              width: 80%;
-              max-width: 600px;
-              box-shadow: 0 0 4px hsla(25, 100%, 50%, 0.5);
-              display: flex;
-              flex-direction: column;
-            }
+          .terminal-container {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            margin: 100px auto 100px auto;
+            border: 1px solid hsl(25, 100%, 50%);
+            border-radius: 5px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 0 4px hsla(25, 100%, 50%, 0.5);
+            display: flex;
+            flex-direction: column;
+          }
 
-            .terminal-input {
-              width: calc(100% - 20px); /* Adjust for padding */
-              background: transparent;
-              border: none;
-              outline: none;
-              color: hsl(25, 100%, 50%);
-              font-size: 1.2em;
-              caret-color: hsl(25, 100%, 50%);
-            }
+          .terminal-input {
+            width: calc(100% - 20px); /* Adjust for padding */
+            background: transparent;
+            border: none;
+            outline: none;
+            color: hsl(25, 100%, 50%);
+            font-size: 1.2em;
+            caret-color: hsl(25, 100%, 50%);
+          }
 
-            .terminal-line::before {
-              color: hsl(25, 100%, 50%);
-              content: "user@amberelec:~$";
-              display: flex;
-              flex-direction: rows;
-              margin-right: 10px;
-            }
+          .terminal-line::before {
+            color: hsl(25, 100%, 50%);
+            content: "user@amberelec:~$";
+            display: flex;
+            flex-direction: rows;
+            margin-right: 10px;
+          }
 
-            .terminal-line {
-              display: flex;
-              align-items: center;
-              white-space: nowrap;
-              color: hsl(25, 100%, 50%);
-            }
+          .terminal-line {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: hsl(25, 100%, 50%);
+          }
 
-            .terminal-container .terminal-cursor {
-              display: inline-block;
-              width: 10px;
-              height: 1.2em;
+          .terminal-container .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background: hsl(25, 100%, 50%);
+            animation: blink 1s steps(2, start) infinite;
+          }
+
+          .terminal-container:focus {
+            outline: none; /* Remove default focus outline */
+            border: 1px solid hsl(25, 100%, 50%); /* Keep orange border */
+          }
+
+          .terminal-container *::selection {
+            background: hsl(25, 100%, 50%); /* Orange highlight */
+            color: white; /* White text */
+          }
+
+          .cursor-block {
+            width: 10px;
+            height: 20px;
+            margin-right: 2px;
+            background: hsl(25, 100%, 50%);
+          }
+
+          @keyframes blink {
+            0%, 50% {
               background: hsl(25, 100%, 50%);
-              animation: blink 1s steps(2, start) infinite;
             }
+            50.01%, 100% {
+              background: transparent;
+            }
+          }
 
-            .terminal-container:focus {
-              outline: none; /* Remove default focus outline */
-              border: 1px solid hsl(25, 100%, 50%); /* Keep orange border */
-            }
-
-            .terminal-container *::selection {
-              background: hsl(25, 100%, 50%); /* Orange highlight */
-              color: white; /* White text */
-            }
-
-            @keyframes blink {
-              0%, 50% {
-                background: hsl(25, 100%, 50%);
-              }
-              50.01%, 100% {
-                background: transparent;
-              }
-            }
-          </style>
+          .task-progress {
+            height: 20px;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            display: flex;
+            flex-direction: row;
+          }
+        </style>
+        <div style="width: 100%; height: 100%; display: block;">
+          <h1 class="section-title crt-text" style="margin-bottom: 120px;">Reach Out</h1>
           <div class="terminal-container">
             <div class="terminal-line">
               <span class="terminal-text"></span>
               <div class="terminal-cursor"></div>
             </div>
           </div>
-          <script>
+        </div>
+        <script>
+          const terminalContainer = document.querySelector('.terminal-container');
+          const terminalText = document.querySelector('.terminal-text');
+
+          let prompts = [
+            "Enter your email.",
+            "What is your name?",
+            "Type your message.",
+            "Send? (y/n)"
+          ];
+
+          let tasks = [
+            "Task 1: Analyzing input...",
+            "Task 2: Connecting to server endpoint...",
+            "Task 3: Converting message to byte data...",
+            "Task 4: Uploading to message cloud...",
+            "Task 5: Waiting for response..."
+          ];
+
+          let currentPromptIndex = 0;
+          let currentTaskIndex = 0;
+          let terminalLines = terminalContainer.children;
+
+          let name = null, fromAddress = null, message = null;
+          let emailSuccess = false;
+
+          function addLine(content = "") {
+            const line = document.createElement('div');
+            line.className = 'terminal-line';
+            line.innerHTML = (content && content !== "")
+              ? `<span class="terminal-text non-input">${content}</span>`
+              : `<span class="terminal-text"></span></div>`;
+            
+            if (currentPromptIndex == 0)
+              terminalContainer.insertBefore(line, document.querySelector(".terminal-line"));
+            else
+              terminalContainer.insertBefore(line, terminalLines[terminalLines.length-1]);
+
+            terminalContainer.scrollTop = terminalContainer.scrollHeight; // Keep scrolled to the bottom
+            terminalLines = terminalContainer.children;
+          }
+
+          // This function will check if the inputted text matches any of a set of predefined answers to predefined prompts,
+          // and return the 'pure form' of that answer so that other functions can route properly.
+          function analyzeInput(input)
+          {
+            const yes = ["yes", "ye", "y", "ya", "yeah"];
+            const no = ["no", "n", "ne"];
+            if (yes.indexOf(input) > -1)
+              return yes[0];
+            else if (no.indexOf(input) > -1)
+              return no[0];
+            else if (validateEmail(input))
+              return "email";
+            else
+              return "unknown input";
+          }
+          function validateEmail(value) {
+            var input = document.createElement('input');
+
+            input.type = 'email';
+            input.required = true;
+            input.value = value;
+
+            return typeof input.checkValidity === 'function' ? input.checkValidity() : /\S+@\S+\.\S+/.test(value);
+          }
+
+          // Function to dynamically lengthen the page when new terminal lines are added.
+          function adjustPageHeight() {
+            // Calculate the total height needed for the terminal
+            const margin = 200;
+            const terminalBottom = terminalContainer.offsetTop + terminalContainer.offsetHeight + margin;
+
+            // Ensure the body is at least as tall as the terminal requires
+            const currentBodyHeight = document.body.offsetHeight;
+            if (terminalBottom >= currentBodyHeight) {
+              document.body.style.height = `${terminalBottom}px`;
+              console.log("Adjust page height");
+            }
+          }
+
+          // Adjust height whenever content is added
+          const observer = new MutationObserver(() => {
+            adjustPageHeight();
+          });
+          observer.observe(terminalContainer, { childList: true, subtree: false });
+
+          function scrollToBottom() {
+            terminalContainer.scrollTop = terminalContainer.scrollHeight;
+          }
+
+          async function sendEmail(name, fromAddress, message)
+          {
+            if (!name || !fromAddress || !message)
+            {
+              console.log("Invalid Email Data: name=" + name + " address=" + fromAddress + " message=" + message);
+              emailSuccess = false;
+              return;
+            }
+
+            const formspreeEndpoint = "https://formspree.io/f/xzzzjppg";
+            const formData = {
+              name: name,
+              email: fromAddress,
+              message: message
+            };
+
+            try {
+              const response = await fetch(formspreeEndpoint, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+              });
+
+              if (response.ok) {
+                console.log("Form submitted successfully:", await response.json());
+                emailSuccess = true;
+              } else {
+                console.error("Form submission failed:", await response.json());
+                emailSuccess = false;
+              }
+            } catch (error) {
+              console.error("Error submitting form:", error);
+              emailSuccess = false;
+            }
+          }
+
+          // Function to run a task's progress bar
+          function runTaskProgress(taskMessage, callback) {
             const terminalContainer = document.querySelector('.terminal-container');
-            const terminalText = document.querySelector('.terminal-text');
 
-            let prompts = [
-              "Enter your email.",
-              "Type your message.",
-              "Send?"
-            ];
+            // Display the task message
+            const taskLine = document.createElement('div');
+            taskLine.classList.add('terminal-line');
+            taskLine.textContent = taskMessage;
+            terminalContainer.appendChild(taskLine);
 
-            let currentPromptIndex = 0;
-            let terminalLines = terminalContainer.children;
+            // Create a progress bar
+            const taskProgressBar = document.createElement('div');
+            taskProgressBar.classList.add('task-progress');
+            terminalContainer.appendChild(taskProgressBar);
 
-            // Initialize terminal
-            function addLine(content = "") {
-              const line = document.createElement('div');
-              line.className = 'terminal-line';
-              line.innerHTML = (content && content !== "")
-                ? `<span class="terminal-text non-input">${content}</span>`
-                : `<span class="terminal-text"></span></div>`;
-              if (currentPromptIndex == 0)
-                terminalContainer.insertBefore(line, document.querySelector(".terminal-line"));
-              else
-                terminalContainer.insertBefore(line, terminalLines[terminalLines.length-1]);
-              terminalContainer.scrollTop = terminalContainer.scrollHeight; // Keep scrolled to the bottom
-              terminalLines = terminalContainer.children;
+            let progress = 0;
+            const maxBlocks = Math.floor(taskProgressBar.clientWidth / 12);
+
+            const interval = setInterval(() => {
+              if (progress < maxBlocks) {
+                const block = document.createElement('span');
+                block.classList.add('cursor-block');
+                taskProgressBar.appendChild(block);
+                progress++;
+              } else {
+                clearInterval(interval);
+                callback(); // Move to the next task
+              }
+            }, 15); // Adjust the speed of block animation
+          }
+
+          // Function to start the task sequence
+          function startTasks() {
+            if (currentTaskIndex < tasks.length) {
+              runTaskProgress(tasks[currentTaskIndex], () => {
+                currentTaskIndex++;
+                startTasks(); // Trigger the next task
+              });
+            } else {
+              // Show the completion message
+              const terminalContainer = document.querySelector('.terminal-container');
+              
+              if (emailSuccess) {
+                const completionMessage = document.createElement('div');
+                completionMessage.classList.add('terminal-line');
+                completionMessage.textContent = "Your message has been sent!";
+                terminalContainer.appendChild(completionMessage);
+              }
+              else {
+                const failureMessage = document.createElement('div');
+                const failureMessage2 = document.createElement('div');
+                failureMessage.classList.add('terminal-line');
+                failureMessage2.classList.add('terminal-line');
+                failureMessage.textContent = "Your message failed along the way...";
+                failureMessage2.textContent = "Reload the page to try again.";
+                terminalContainer.appendChild(failureMessage);
+                terminalContainer.appendChild(failureMessage2);
+              }
             }
+          }
 
-            function scrollToBottom() {
-              terminalContainer.scrollTop = terminalContainer.scrollHeight;
-            }
+          // Print the first prompt
+          addLine(prompts[currentPromptIndex]);
 
-            // Print the first prompt
-            addLine(prompts[currentPromptIndex]);
+          document.addEventListener('keydown', (event) => {
+            // Prevent default browser shortcuts like page refresh
+            event.preventDefault();
 
-            document.addEventListener('keydown', (event) => {
-              // Prevent default browser shortcuts like page refresh
-              event.preventDefault();
-
-              if (event.key === "Enter") {
-                if (currentPromptIndex < prompts.length - 1)
-                {
-                  currentPromptIndex++;
-                  addLine(terminalText.textContent); //Send current content to new line
-                  addLine(prompts[currentPromptIndex]); //Print next prompt
-                }
-                else
-                {
-                  addLine(terminalText.textContent);//Send current content to new line
-                }
+            if (event.key === "Enter") {
+                var result = analyzeInput(terminalText.textContent);
+                if (currentPromptIndex == 0 && result == "email")
+                  fromAddress = terminalText.textContent;
+                else if (currentPromptIndex == 1)
+                  name = terminalText.textContent;
+                else if (currentPromptIndex == 2)
+                  message = terminalText.textContent;
+                else if (currentPromptIndex == 3 && result === "yes")
+                  sendEmail(name, fromAddress, message);
+                
+              if (currentPromptIndex < prompts.length - 1)
+              {
+                currentPromptIndex++;
+                addLine(terminalText.textContent); //Send current content to new line
+                addLine(prompts[currentPromptIndex]); //Print next prompt
                 terminalText.textContent = "";
-                return;
               }
-
-              // Handle backspace
-              if (event.key === "Backspace") {
-                terminalText.textContent = terminalText.textContent.slice(0, -1);
-                return;
+              else
+              {
+                addLine(terminalText.textContent);//Send current content to new line
+                terminalText.parentElement.style.display = "None"; // Make current typing line gone
+                // Start the first task
+                startTasks();
               }
+              return;
+            }
 
-              // Handle regular characters
-              if (event.key.length === 1) {
-                terminalText.textContent += event.key;
-              }
-            });
+            // Handle backspace
+            if (event.key === "Backspace") {
+              terminalText.textContent = terminalText.textContent.slice(0, -1);
+              return;
+            }
 
-            // Refocus on click
-            terminalContainer.addEventListener('click', () => {
-              terminalContainer.focus();
-            });
+            // Handle regular characters
+            if (event.key.length === 1) {
+              terminalText.textContent += event.key;
+            }
+          });
 
-            terminalContainer.setAttribute('tabindex', 0); // Make terminal focusable
+          // Refocus on click
+          terminalContainer.addEventListener('click', () => {
             terminalContainer.focus();
-          </script>
-        </section>
-        
+          });
+
+          terminalContainer.setAttribute('tabindex', 0); // Make terminal focusable
+          terminalContainer.focus();
+        </script>
+      </section>
     </div>
-</body>
+  </body>
 </html>
