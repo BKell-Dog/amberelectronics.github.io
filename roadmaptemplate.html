@@ -1,0 +1,298 @@
+<html>
+<head>
+</head>
+<body>
+	<section class="roadmap">
+		<h1 class="roadmap-title crt-text">Project Title</h1>
+		<p class="roadmap-overview crt-text">Welcome to the project roadmap. Below is a directory structure representing the steps of the project. Click on a step to read the description as if it were a file!</p>
+
+		<div class="roadmap-container">
+			<div class="terminal-output">
+				<pre class="tree-output" id="tree-output"></pre>
+			</div>
+
+			<div class="roadmap-file-reader">
+				<div class="file-reader-header crt-text">Opened File: README.TXT</div>
+				<div class="file-reader-content"></div>
+				<div class="file-reader-status-and-progress">
+					<div class="file-reader-status"></div>
+					<div class="file-reader-progress"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		/* Dark Mode and 80s Terminal Style */
+		:root {
+			--orangecolor: #ff6a00;
+			--whitecolor: #e5fffd;
+		}
+
+		body {
+			background-color: black;
+			font-family: monospace;
+			color: white;
+			margin: 0;
+			padding: 0;
+		}
+
+		section {
+			margin: 30px 30px 30px 30px;
+		}
+
+		.roadmap {
+			padding: 20px;
+			max-width: 1200px;
+			margin: 20px auto;
+		}
+
+		.roadmap-title {
+			color: var(--orangecolor);
+			text-align: left;
+			text-shadow: 0 0 1px rgba(255, 165, 0, 0.6);
+			margin-bottom: 10px;
+		}
+
+		.roadmap-overview {
+			font-size: 1.2em;
+			color: var(--orangecolor);
+			text-align: left;
+			margin-bottom: 30px;
+			opacity: 0.8;
+		}
+
+		.crt-text {
+			font-family: monospace;
+		}
+
+		.roadmap-container {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		/* Simulating the Terminal Tree Output */
+		.terminal-output {
+			flex: 1;
+			color: var(--orangecolor);
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			width: 100%;
+		}
+
+		pre.tree-output {
+			font-size: 1em;
+			line-height: 1.4;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+			display: flex;
+			flex-direction: column;
+		}
+
+		/* File Reader Section */
+		.roadmap-file-reader {
+			flex: 2;
+			padding: 20px;
+			border-radius: 8px;
+			color: var(--whitecolor);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			display: none;
+			flex-direction: column;
+		}
+
+		.file-reader-header {
+			font-size: 1.2em;
+			margin-bottom: 20px;
+			color: #ff6600;
+		}
+
+		.file-reader-content {
+			font-size: 1em;
+			line-height: 1.5;
+			overflow-y: auto;
+			height: 100%;
+		}
+
+		.file-reader-content p {
+			margin-bottom: 10px;
+		}
+
+		.file-reader-status-and-progress {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.file {
+			cursor: pointer;
+			color: #ff6600;
+			transition: color 0.2s;
+		}
+
+		.file:hover {
+			color: var(--whitecolor);
+		}
+
+		.directory-line {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.progress-bar {
+			width: 50%;
+			height: 10px;
+			border: 2px solid var(--whitecolor);
+			border-radius: 2px;
+			overflow: hidden;
+			margin-top: 10px;
+		}
+
+		.progress {
+			height: 100%;
+			background-color: var(--whitecolor);
+			transition: width 0.3s ease;
+		}
+
+
+		/* Responsive Layout */
+		@media (max-width: 768px) {
+			.roadmap-container {
+				flex-direction: column;
+			}
+
+			.roadmap-file-reader {
+				margin-top: 20px;
+			}
+		}
+	</style>
+
+	<script>
+		const roadmap = {
+			category1: {
+				files: ["CAT1.TXT"],
+				substeps: {
+					substep1: {
+						files: ["SUBSTEP1.TXT"],
+					},
+					substep2: {
+						files: ["SUBSTEP2.TXT"],
+					},
+				},
+			},
+			category2: {
+				files: ["CAT2.TXT"],
+			},
+			category3: {
+				files: ["CAT3-1.TXT", "CAT3-2.TXT"],
+			},
+		};
+
+
+		const stepDescriptions = {
+			"category1/CAT1.TXT": {
+				description: "Overview of the project and initial configurations. Includes creating the project repository and setting up version control.",
+				status: "COMPLETE",
+				progress: 100
+			},
+			"category1/substep1/SUBSTEP1.TXT": {
+				description: "Research and analysis phase to gather requirements and understand project scope.",
+				status: "COMPLETE",
+				progress: 100
+			},
+			"category1/substep2/SUBSTEP2.TXT": {
+				description: "Define the architecture and create initial prototypes to validate concepts.",
+				status: "IN PROGRESS",
+				progress: 60
+			},
+			"category2/CAT2.TXT": {
+				description: "Development phase to implement core functionality and integrate APIs.",
+				status: "NOT STARTED",
+				progress: 0
+			},
+			"category3/CAT3-1.TXT": {
+				description: "Testing phase, including unit tests and quality assurance to ensure stability.",
+				status: "NOT STARTED",
+				progress: 0
+			},
+			"category3/CAT3-2.TXT": {
+				description: "Deployment and release process to publish the application.",
+				status: "NOT STARTED",
+				progress: 0
+			}
+		};
+
+
+		const treeOutput = document.getElementById("tree-output");
+
+		function generateTree(folder, depth = 0) {
+			Object.entries(folder).forEach(([key, value], index, arr) => {
+				const isLast = index === arr.length - 1;
+				const prefix = isLast ? `└── ` : `├── `;
+				const connector = isLast ? "    " : "│   ";
+
+	    		// Generate proper indentation based on depth
+				const indentation = "|   ".repeat(depth);
+
+				if (typeof value === "object" && !Array.isArray(value)) {
+	      			// Directory or step
+					treeOutput.innerHTML += `<div class="directory-line">${indentation}${prefix}${key}/</div>\n`;
+
+	      			// Files in this directory
+					if (value.files) {
+						value.files.forEach(file => {
+							treeOutput.innerHTML += `<div class="directory-line">${indentation}${connector}└── <div class="file">${file}</div></div>\n`;
+						});
+					}
+
+	      			// Recursively generate substeps
+					if (value.substeps) {
+						generateTree(value.substeps, depth + 1);
+					}
+				}
+			});
+		}
+
+		treeOutput.innerHTML += `<div>user@amberelec:~$ tree roadmaps/\n.</div>\n`;
+		generateTree(roadmap);
+
+  		// Handle file clicks to display content in the file reader
+		document.querySelector('.tree-output').addEventListener('click', function(e) {
+			if (e.target.classList.contains('file')) {
+				const clickedFile = e.target.textContent.trim();
+
+		    // Helper function to traverse the JSON and find the full path of the clicked file
+		    function findFilePath(folder, parentPath = "") {
+		      for (const [key, value] of Object.entries(folder)) {
+		        if (key === "files" && Array.isArray(value) && value.includes(clickedFile)) {
+		          return `${parentPath}/${clickedFile}`;
+		        } else if (key === "substeps" && typeof value === "object") {
+		          const result = findFilePath(value, parentPath);
+		          if (result) return result;
+		        } else if (typeof value === "object" && !Array.isArray(value)) {
+		          const result = findFilePath(value, `${parentPath}/${key}`);
+		          if (result) return result;
+		        }
+		      }
+		      return null;
+		    }
+
+		    // Find the full path of the clicked file using the roadmap JSON
+		    const fullPath = findFilePath(roadmap, "").substring(1);
+		    console.log(fullPath);
+
+				const fileContent = stepDescriptions[fullPath];
+
+				if (fileContent) {
+	      			// Update the file reader with the content
+					document.querySelector('.file-reader-header').textContent = `Opened File: ${fullPath}`;
+					document.querySelector('.file-reader-content').innerHTML = `<p>${fileContent.description}</p>`;
+					document.querySelector('.file-reader-status').innerHTML = `<p><strong>Status:</strong> ${fileContent.status}</p>`
+					document.querySelector('.file-reader-progress').innerHTML = `<div class="progress-bar"><div class="progress" style="width: ${fileContent.progress}%"></div></div><p><strong>Progress:</strong> ${fileContent.progress}%</p>`;
+					document.querySelector('.roadmap-file-reader').style.display = 'flex';
+				}
+			}
+		});
+	</script>
+
+</body>
+</html>
