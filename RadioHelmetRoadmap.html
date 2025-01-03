@@ -3,8 +3,8 @@
 </head>
 <body>
 	<section class="roadmap">
-		<h1 class="roadmap-title crt-text">Project Title</h1>
-		<p class="roadmap-overview crt-text">Welcome to the project roadmap. Below is a directory structure representing the steps of the project. Click on a step to read the description as if it were a file!</p>
+		<h1 class="roadmap-title crt-text">Radio-Integrated Fire Helmet</h1>
+		<p class="roadmap-overview crt-text">A basic upgrade to firefighting technology. All firefighters carry a radio with them clipped to the outside of their fire suit, and because of the radio is always outside of their face masks, they have a hard time communicating when they most need it. Garbled audio coming in, and muffled speech going out. This device will attach to a firefighter's face mask and provide a microphone inside the mask, and a speaker over the ear, plugging into the existing handheld radio. Firefighters will be able to hear and speak to each other clearly on scene.</p>
 
 		<div class="roadmap-container">
 			<div class="terminal-output">
@@ -209,41 +209,42 @@
 
 		const stepDescriptions = {
 			"Conception/ESTABLISH_BUSINESS_NEED.TXT": {
-				description: "Overview of the project and initial configurations. Includes creating the project repository and setting up version control.",
-				summary: "Finished",
+				description: "Listening to the problems of firefighters regarding radio communications when on scene.",
+				summary: "I validated this idea among my friends at the local fire company who all expressed extreme frustration at the current state of their radio comms, and hope that the town would buy a solution if one was invented.",
 				status: "COMPLETE",
 				progress: 100
 			},
 			"Define_Requirements/DEFINE_REQUIREMENTS.TXT": {
-				description: "Research and analysis phase to gather requirements and understand project scope.",
-				status: "COMPLETE",
-				progress: 100
+				description: "Listing the behaviors of the device which will effectively solve the core problem of radio communications during a fire. Understand the form and behavior of the current fire masks and L3 radios and how any potential device can interface with established technologies.",
+				status: "IN PROGRESS",
+				progress: 80
 			},
 			"Define_Requirements/DEFINE_RISK.TXT": {
-				description: "Define the architecture and create initial prototypes to validate concepts.",
+				description: "Understand the risks involved in changing any portion of the firefighter's equipment, and plan redundancies into the design to account for tech failure. Perform DFMEA analysis.",
 				status: "NOT STARTED",
 				progress: 0
 			},
 			"Define_Requirements/RESEARCH_REGULATIONS.TXT": {
-				description: "Development phase to implement core functionality and integrate APIs.",
+				description: "Discover local and state regulations relating to the process of selling equpment to fire companies (e.g. bidding for a contract, fitting within town budget), the operation of that equipment, and industry standards for durability and longevity.",
 				status: "NOT STARTED",
 				progress: 0
 			},
 			"Research/ANALYZE_FEASIBILITY.TXT": {
-				description: "Testing phase, including unit tests and quality assurance to ensure stability.",
+				description: "Gather information on the communications standards used by the existing L3 radios, and whether that signal cna be intercepted by new tech, on the conditions present during a fire, on the qualities of a fire mask that must be preserved such as the airtight seal, visibility, weight, and how it is put on quickly and easily.",
 				status: "NOT STARTED",
 				progress: 0
 			},
 			"Research/UNDERSTAND_EXISTING_TECHNOLOGIES.TXT": {
-				description: "Deployment and release process to publish the application.",
+				description: "Research existing radio communications technologies and the applications in the firefighting field. Understand state of the art audio technology in general to ensure the new product is modern and versatile.",
 				status: "NOT STARTED",
 				progress: 0
 			},
 			"Research/RESEARCH_COMPETITION.TXT": {
-				description: "Development phase to implement core functionality and integrate APIs.",
-				status: "NOT STARTED",
-				progress: 0
+				description: "Discover the current alternatives, if any, to solve the core problem of radio comms during a fire. Understand how firefighters today are currently circumventing this limitation in technology.",
+				status: "IN PROGRESS",
+				progress: 50
 			},
+			//---------------------------------------------------------------------------
 			"Proof_Of_Concept/DEVELOP_PoC_DEVICE.TXT": {
 				description: "Testing phase, including unit tests and quality assurance to ensure stability.",
 				status: "NOT STARTED",
@@ -385,7 +386,7 @@
 				if (fileContent) {
 	      			// Update the file reader with the content
 					document.querySelector('.file-reader-header').textContent = `Opened File: ${fullPath}`;
-					document.querySelector('.file-reader-content').innerHTML = `<p>${fileContent.description}</p><p>${fileContent.summary}</p>`;
+					document.querySelector('.file-reader-content').innerHTML = `<p>${fileContent.description}</p>`;
 					document.querySelector('.file-reader-status').innerHTML = `<p><strong>Status:</strong> ${fileContent.status}` + ((fileContent.summary) ? ` ――― ${fileContent.summary}` : ``) + `</p>`;
 					document.querySelector('.file-reader-progress').innerHTML = `<div class="progress-bar"><div class="progress" style="width: ${fileContent.progress}%"></div></div><p><strong>Progress:</strong> ${fileContent.progress}%</p>`;
 					document.querySelector('.roadmap-file-reader').style.display = 'flex';
@@ -395,4 +396,4 @@
 	</script>
 
 </body>
-</html>
+</html> 
