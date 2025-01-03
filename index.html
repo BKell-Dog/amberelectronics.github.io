@@ -13,6 +13,41 @@
   </head>
   <body class="mx-auto" style="margin: 0px; background-color: black;">
     <style>
+      @font-face {
+        font-family: 'Data Control'; /* Name for referencing the font */
+        src: url('./fonts/data-control/data-latin.ttf') format('truetype'); /* Legacy */
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Impact';
+        src: url('./fonts/impact/impact.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Purista';
+        src: url('./fonts/purista/Purista-SemiBold.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Toleis';
+        src: url('./fonts/toleis/Toleis-Regular.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'Toleis';
+        src: url('./fonts/toleis/Toleis-Bold.otf') format('opentype');
+        font-weight: bold;
+        font-style: normal;
+      }
+
       section {
         height: calc(100vh);
       }
@@ -25,11 +60,12 @@
       }
 
       .crt-text {
-        font-family: fantasy;
-        font-weight: 170;
+        font-family: 'Toleis', serif;
         color: #e5fffd; 
-        letter-spacing: 5px;
-        text-shadow: 0 0 3px hsl(175, 100%, 95%);
+        letter-spacing: 2px;
+        text-shadow: 0 0 8px hsl(175, 100%, 95%);
+        text-transform: uppercase;
+        font-size: 25px;
       }
     </style>
     <div class="content index">
@@ -44,7 +80,7 @@
         <!-- Landing Screen with Background Effect -->
         <div class="matrix-container">
           <!-- Main Page Title -->
-          <h1 class="crt-text" style="position: absolute; width: 100%; text-shadow: 0 0 0px white; text-align: center; font-size: 35px; font-weight: 700;">AMBER ELECTRONICS</h1>
+          <h1 class="crt-text" style="position: absolute; width: 100%; text-shadow: 0 0 0px white; font-family: 'Impact', serif; text-align: center; font-size: 35px; font-weight: 700;">AMBER ELECTRONICS</h1>
         </div>
         <script>
           const canvas = document.createElement("canvas");
@@ -128,16 +164,18 @@
 
               .grid-item h2 {
                 margin: 0 0 20px 0;
-                font-size: 24px;
+                font-size: 20px;
               }
 
               .grid-item button {
                 padding: 10px 15px;
-                font-size: 1rem;
-                font-family: fantasy;
+                font-size: 0.95rem;
+                font-family: "Purista", serif;
+                font-weight: bold;
                 letter-spacing: 2px;
                 color: #e5fffd;
                 background-color: rgb(255, 118, 20);
+                text-shadow: 0 0 8px hsl(175, 100%, 95%);
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;

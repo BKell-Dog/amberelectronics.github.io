@@ -3,6 +3,7 @@
 </head>
 <body>
 	<section class="roadmap">
+		<div class="back-button crt-text-orange"><a class="crt-text-orange" href="javascript:window.history.back();"><</a></div>
 		<h1 class="roadmap-title crt-text">Radio-Integrated Fire Helmet</h1>
 		<p class="roadmap-overview crt-text">A basic upgrade to firefighting technology. All firefighters carry a radio with them clipped to the outside of their fire suit, and because of the radio is always outside of their face masks, they have a hard time communicating when they most need it. Garbled audio coming in, and muffled speech going out. This device will attach to a firefighter's face mask and provide a microphone inside the mask, and a speaker over the ear, plugging into the existing handheld radio. Firefighters will be able to hear and speak to each other clearly on scene.</p>
 
@@ -37,6 +38,12 @@
 			padding: 0;
 		}
 
+		a {
+			color: var(--orangecolor);
+			text-decoration: none;
+			font-size: 20px;
+		}
+
 		section {
 			margin: 30px 30px 30px 30px;
 		}
@@ -69,6 +76,7 @@
 		.roadmap-container {
 			display: flex;
 			justify-content: space-between;
+			font-size: 14px;
 		}
 
 		/* Simulating the Terminal Tree Output */
